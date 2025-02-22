@@ -22,7 +22,8 @@ def simulate_reaction(a, b, c, d, reaction_type,
                       A_phase1, A_phase2, A_phase3, A_phase4,
                       B_phase1, B_phase2, B_phase3, B_phase4,
                       C_phase1, C_phase2, C_phase3, C_phase4,
-                      D_phase1, D_phase2, D_phase3, D_phase4):
+                      D_phase1, D_phase2, D_phase3, D_phase4,
+                      show_title):
     # Base rate constants.
     k1_base = 0.02
     k2_base = 0.01
@@ -148,8 +149,6 @@ def simulate_reaction(a, b, c, d, reaction_type,
         if D_phase3 and D_phase4:
             plt.plot([t_phase3[-1], t_phase3[-1]], [sol3[-1, 3], sol4[0, 3]], color='purple', linestyle='solid', linewidth=2)
 
-    # ... after plotting all species and drawing vertical lines ...
-
     plt.xlabel("Time")
     plt.ylabel("Concentration")
     if show_title:
@@ -188,7 +187,30 @@ D_perturb = st.sidebar.slider("D Perturb", min_value=-0.5, max_value=0.5, value=
 
 # Show/hide phase sections
 st.sidebar.header("Show/Hide Phase Sections")
-# ... (rest of the phase checkboxes) ...
+
+st.sidebar.subheader("Species A")
+A_phase1 = st.sidebar.checkbox("A Phase 1", value=True)
+A_phase2 = st.sidebar.checkbox("A Phase 2", value=True)
+A_phase3 = st.sidebar.checkbox("A Phase 3", value=True)
+A_phase4 = st.sidebar.checkbox("A Phase 4", value=True)
+
+st.sidebar.subheader("Species B")
+B_phase1 = st.sidebar.checkbox("B Phase 1", value=True)
+B_phase2 = st.sidebar.checkbox("B Phase 2", value=True)
+B_phase3 = st.sidebar.checkbox("B Phase 3", value=True)
+B_phase4 = st.sidebar.checkbox("B Phase 4", value=True)
+
+st.sidebar.subheader("Species C")
+C_phase1 = st.sidebar.checkbox("C Phase 1", value=True)
+C_phase2 = st.sidebar.checkbox("C Phase 2", value=True)
+C_phase3 = st.sidebar.checkbox("C Phase 3", value=True)
+C_phase4 = st.sidebar.checkbox("C Phase 4", value=True)
+
+st.sidebar.subheader("Species D")
+D_phase1 = st.sidebar.checkbox("D Phase 1", value=True)
+D_phase2 = st.sidebar.checkbox("D Phase 2", value=True)
+D_phase3 = st.sidebar.checkbox("D Phase 3", value=True)
+D_phase4 = st.sidebar.checkbox("D Phase 4", value=True)
 
 # Run simulation and display plot
 fig = simulate_reaction(a, b, c, d, reaction_type,
@@ -201,4 +223,3 @@ fig = simulate_reaction(a, b, c, d, reaction_type,
                         show_title)
 
 st.pyplot(fig)
-
